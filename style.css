@@ -185,12 +185,14 @@ textarea {
         gap: 10px;
         padding: 1rem;
         justify-content: space-around;
+        width: 70vh;
     }
 
     .botoes_acao {
         display: flex;
         flex-flow: column;
         justify-content: space-between;
+        width: 80%;
     }
 
     #criptografar {
@@ -219,6 +221,15 @@ textarea {
         justify-content: space-between;
         align-items: center;
         width: 100%;
+    }
+
+    #mensagem {
+        font-size: 32px;
+        width: 70%;
+        text-align: left;
+        flex-grow: 1;
+        padding-right: 1rem;
+        white-space: break-spaces;
     }
 }
 
