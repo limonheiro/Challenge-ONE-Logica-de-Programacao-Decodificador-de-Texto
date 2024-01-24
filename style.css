@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 * {
+    clear:both;
     scrollbar-width: thin;
     margin: 0px;
     padding: 0px;
@@ -178,7 +179,92 @@ textarea {
     height: 90vh;
 }
 
-@media (min-width: 100px) and (max-width:749px) {
+@media  (max-width:449px) {
+    .container {
+        display: flex;
+        flex-flow: column;
+        gap: 10px;
+        padding: 1rem;
+        justify-content: space-around;
+    }
+
+    #mensagem {
+        font-size: 32px;
+        width: 80%;
+        text-align: left;
+        flex-grow: 1;
+        padding-right: 1rem;
+        white-space: break-spaces;
+        width: 20%;
+    }
+
+    textarea {
+        font-family: 'Inter', sans-serif;
+        border: none;
+        resize: none;
+        margin: 2rem 2rem 2rem 2rem;
+        background-color: #ffffff00;
+        color: #0a3871;
+        height: 80%;
+        width: 100%;
+        white-space: break-spaces;
+    }
+
+    .botoes_acao {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+
+    }
+
+    #criptografar {
+        width: 100%;
+    }
+
+    #descriptografar {
+        width: 100%;
+    }
+
+    #saida {
+        border-radius: 32px;
+        background-color: white;
+        height: 100%;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    #mensagem {
+        font-size: 32px;
+        width: 70%;
+        text-align: left;
+        flex-grow: 1;
+        padding-right: 1rem;
+        white-space: break-spaces;
+    }
+
+    #painel_direito #painel_esquerdo{
+        display: flex;
+        font-family: 'Inter', sans-serif;
+    }
+
+    #painel_direito {
+        align-self: flex-start;
+        height: 50vh;
+        width: 40vh;
+    }
+
+    #painel_esquerdo {
+        flex-flow: column;
+        height: 49vh;
+        width: 40vh;
+    }
+}
+
+@media (min-width: 450px) and (max-width:749px) {
     .container {
         display: flex;
         flex-flow: column;

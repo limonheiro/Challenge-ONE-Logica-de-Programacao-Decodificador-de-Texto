@@ -1,25 +1,34 @@
 let convertido = false;
 
-function criptografarTexto() {
-    const cripta = {
-        "e": "enter",
-        "i": "imes",
-        "a": "ai",
-        "o": "ober",
-        "u": "ufat"
-    }
-    const texto = document.getElementById("mensagem").value;
-    let saida = document.getElementById("saida");
-    let newText = ""
-    const regex = /[a-z]/;
+const cripta = {
+    "e": "enter",
+    "i": "imes",
+    "a": "ai",
+    "o": "ober",
+    "u": "ufat"
+}
 
-    if(! regex.test(texto)){
+function verificarTexto(texto){
+
+    const regex = /[A-Z]|\d/g;
+
+    if(regex.test(texto)){
         const htmlFinal = `<textarea class="saida_texto" id="mensagem_erro" disabled>Caracter(es) invalido(s). Apenas letras minúsculas e sem acento. </textarea>`;
 
         saida.innerHTML = htmlFinal;
         convertido = false;
-        return 0;
+        return 1;
     }
+    return 0;
+}
+
+function criptografarTexto() {
+    const texto = document.getElementById("mensagem").value;
+    let saida = document.getElementById("saida");
+    let newText = ""
+
+    if (verificarTexto(texto)) {return 0};
+
 
     for (let i of texto) {
         let letter = cripta[i];
@@ -30,28 +39,16 @@ function criptografarTexto() {
         }
     }
 
-    const htmlFinal = `<textarea class="saida_texto" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
+    const htmlFinal = `<textarea class="saida_texto" id="resultado" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
 
     saida.innerHTML = htmlFinal;
     convertido = true;
 }
 
 function descriptografarTexto() {
-    
-    if (! convertido) {
-        return 0;
-    }
-
-    const cripta = {
-        "e": 5,
-        "i": 4,
-        "a": 2,
-        "o": 4,
-        "u": 4
-    };
 
     const texto = document.getElementById("mensagem").value;
-    let saida = document.getElementById("saida_texto");
+    let saida = document.getElementById("resultado");
     let newText = "";
     let i = 0;
 
@@ -63,19 +60,27 @@ function descriptografarTexto() {
 
         if (jump) {
             newText += letter;
-            i += jump;
+            i += jump.length;
         } else {
             newText += texto[i];
             i += 1;
         }
     }
 
-    saida.textContent = newText;
+    if (! convertido) {
+        let saida = document.getElementById("saida");
+        const htmlFinal = `<textarea class="saida_texto" id="resultado" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
+        saida.innerHTML = htmlFinal;
+    }else{
+        let saida = document.getElementById("resultado");
+        saida.textContent = newText;
+    }
+    
 
 }
 
 function copiarTexto() {
-    const texto = document.getElementById("saida_texto").textContent;
+    const texto = document.getElementById("resultado").textContent;
 
     navigator.clipboard.writeText(texto)
     .then(() => {})
