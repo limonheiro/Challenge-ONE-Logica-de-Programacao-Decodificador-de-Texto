@@ -24,7 +24,7 @@ textarea {
     font-family: 'Inter', sans-serif;
     border: none;
     resize: none;
-    margin: 5rem 2rem 2rem 5rem;
+    margin: 3rem 2rem 2rem 5rem;
     background-color: #ffffff00;
     color: #0a3871;
     height: 80%;
@@ -179,7 +179,7 @@ textarea {
     height: 90vh;
 }
 
-@media  (max-width:449px) {
+@media  (max-width:649px) {
     .container {
         display: flex;
         flex-flow: column;
@@ -264,7 +264,7 @@ textarea {
     }
 }
 
-@media (min-width: 450px) and (max-width:749px) {
+@media (min-width: 650px) and (max-width:749px) {
     .container {
         display: flex;
         flex-flow: column;
@@ -287,6 +287,14 @@ textarea {
 
     #descriptografar {
         width: 100%;
+    }
+
+    #painel_esquerdo {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-flow: column;
+        height: 90vh;
+        /* width: 80vh; */
     }
 
     #painel_direito {
@@ -326,6 +334,8 @@ textarea {
         gap: 10px;
         padding: 1rem;
         justify-content: space-around;
+        width: 70vh;
+        align-items: first baseline;
     }
 
     #mensagem {
@@ -351,7 +361,6 @@ textarea {
     .botoes_acao {
         display: flex;
         flex-flow: row;
-        justify-content: space-between;
     }
 
     .saida_texto {
@@ -374,10 +383,18 @@ textarea {
         max-width: 400px;
     }
 
+    #painel_esquerdo {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-flow: column;
+        height: 90vh;
+        width: 70vh;
+    }
+
     #painel_direito {
         display: flex;
         font-family: 'Inter', sans-serif;
-        width: 80vh;
+        width: 70vh;
         margin-bottom: -45%;
     }
 
