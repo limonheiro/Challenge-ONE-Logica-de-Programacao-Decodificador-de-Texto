@@ -6,6 +6,10 @@
     padding: 0px;
 }
 
+*, :before, :after, ::before, ::after {
+    box-sizing: border-box;
+}
+
 *::-webkit-scrollbar {
     width: 2px;
 }
@@ -43,10 +47,16 @@ textarea {
     align-items: center;
 }
 
-#saida_texto {
+.saida_texto {
     font-size: 24px;
     color: #495057;
     width: 80%;
+}
+
+#mensagem_erro{
+    color: red;
+    font-weight: bolder;
+    
 }
 
 #copiar {
@@ -247,7 +257,7 @@ textarea {
         justify-content: space-between;
     }
 
-    #saida_texto {
+    .saida_texto {
         font-size: 24px;
         color: #495057;
         /* margin: 2rem; */

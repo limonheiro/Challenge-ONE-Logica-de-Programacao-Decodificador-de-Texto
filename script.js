@@ -11,6 +11,15 @@ function criptografarTexto() {
     const texto = document.getElementById("mensagem").value;
     let saida = document.getElementById("saida");
     let newText = ""
+    const regex = /[a-z]/;
+
+    if(! regex.test(texto)){
+        const htmlFinal = `<textarea class="saida_texto" id="mensagem_erro" disabled>Caracter(es) invalido(s). Apenas letras minúsculas e sem acento. </textarea>`;
+
+        saida.innerHTML = htmlFinal;
+        convertido = false;
+        return 0;
+    }
 
     for (let i of texto) {
         let letter = cripta[i];
@@ -21,7 +30,7 @@ function criptografarTexto() {
         }
     }
 
-    const htmlFinal = `<textarea id="saida_texto" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
+    const htmlFinal = `<textarea class="saida_texto" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
 
     saida.innerHTML = htmlFinal;
     convertido = true;
