@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css"> -->
+    <title>Desafio Alura</title>
+</head>
+
+<body class="base">
+    <img src="alura logo.svg" alt="logo da alura" class="logo">
+    <div class="container">
+        <div id="painel_esquerdo">
+            <textarea id="mensagem">Digite seu texto</textarea>
+            <div class="dica">
+                <img class="imagem_dica" src="bi_exclamation-circle-fill.svg" alt="">
+                <span class="dica_texto">
+                    Apenas letras minúsculas e sem acento.
+                </span>
+            </div>
+            <div class="botoes_acao">
+
+                <a onclick="criptografarTexto()" id="criptografar" class="botao">Criptografar</a>
+
+                <a onclick="descriptografarTexto()" id="descriptografar" class="botao">Descriptografar</a>
+            </div>
+        </div>
+
+        <div id="painel_direito">
+            <div id="saida">
+                <img src="imagem_procurando.svg" alt="pessoa procurando com uma lupa" class="imagem_inicial" />
+
+                <div class="saida_texto_inicial">
+                    <p id="saida_texto_inicial_top">
+                        Nenhuma mensagem encontrada
+                    </p>
+                    <p class="saida_text_inicial_bottom">
+                        Digite um texto que você deseja criptografar ou descriptografar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
