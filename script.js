@@ -8,36 +8,57 @@ const cripta = {
     "u": "ufat"
 }
 
-function verificarTexto(texto){
+const descripta = {
+    "enter": "e",
+    "imes": "i",
+    "ai": "a",
+    "ober": "o",
+    "ufat": "u",
+}
 
+function erroTexto(texto) {
+    const htmlFinal = `<textarea class="saida_texto" id="mensagem_erro" disabled>${texto}</textarea>`;
+
+    saida.innerHTML = htmlFinal;
+    convertido = false;
+}
+
+function verificarTexto(texto) {
     const regex = /[A-Z]|\d/g;
 
-    if(regex.test(texto)){
-        const htmlFinal = `<textarea class="saida_texto" id="mensagem_erro" disabled>Caracter(es) invalido(s). Apenas letras minúsculas e sem acento. </textarea>`;
-
-        saida.innerHTML = htmlFinal;
-        convertido = false;
+    if (regex.test(texto)) {
+        erroTexto('Caracter(es) invalido(s). Apenas letras minúsculas e sem acento.')
         return 1;
     }
     return 0;
 }
 
+function resultado(texto) {
+    if (!convertido) {
+        const htmlFinal = `<textarea class="saida_texto" id="resultado" disabled>${texto}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
+        const saida = document.getElementById('saida');
+        saida.innerHTML = htmlFinal;
+    } else {
+        const saida = document.getElementById("resultado");
+        saida.textContent = texto;
+    }
+
+}
+
 function criptografarTexto() {
     const texto = document.getElementById("mensagem").value;
     let saida = document.getElementById("saida");
-    let newText = ""
 
-    if (verificarTexto(texto)) {return 0};
+    if (verificarTexto(texto)) {
+        return 0;
+    };
 
-
-    for (let i of texto) {
-        let letter = cripta[i];
-        if (letter) {
-            newText += letter;
-        } else {
-            newText += i;
-        }
+    if(!texto){
+        erroTexto('Nenhuma texto para criptografar!')
+        return 0;
     }
+
+    let newText = texto.replace(/a|e|i|o|u/g, w => cripta[w]);
 
     const htmlFinal = `<textarea class="saida_texto" id="resultado" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
 
@@ -46,45 +67,27 @@ function criptografarTexto() {
 }
 
 function descriptografarTexto() {
-
     const texto = document.getElementById("mensagem").value;
-    let saida = document.getElementById("resultado");
-    let newText = "";
-    let i = 0;
 
-    const arraysize = texto.length;
-
-    while (i < arraysize) {
-        const letter = texto[i];
-        const jump = cripta[letter];
-
-        if (jump) {
-            newText += letter;
-            i += jump.length;
-        } else {
-            newText += texto[i];
-            i += 1;
-        }
+    if (verificarTexto(texto)) {
+        return 0
     }
 
-    if (! convertido) {
-        let saida = document.getElementById("saida");
-        const htmlFinal = `<textarea class="saida_texto" id="resultado" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
-        saida.innerHTML = htmlFinal;
+    let newText = texto.replace(/ai|enter|imes|ober|ufat/g, w => descripta[w]);
+    if(texto === newText){
+        erroTexto('Texto não criptografado')
     }else{
-        let saida = document.getElementById("resultado");
-        saida.textContent = newText;
+        resultado(newText)
     }
     
-
 }
 
 function copiarTexto() {
     const texto = document.getElementById("resultado").textContent;
 
     navigator.clipboard.writeText(texto)
-    .then(() => {})
-    .catch(err => {
-    console.log('Something went wrong', err);
-})
+        .then(() => {})
+        .catch(err => {
+            console.log('Something went wrong', err);
+        })
 }
