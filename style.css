@@ -3,15 +3,10 @@
 :root {
     --main-bg-color: #F3F5FC;
     --main-color: #0a3871;
-
     --white-color: white;
-
     --textarea-bg: #ffffff00;
-
     --texto-saida-color: #495057;
-
     --error-color: rgb(255, 55, 55);
-
     --box-shadow-color: rgba(0, 0, 0, 0.18);
 }
 
@@ -19,15 +14,10 @@
     color: white;
     --main-bg-color: #1e294d;
     --main-color: #5299F1;
-
     --white-color: #121212;
-
     --textarea-bg: #ffffff00;
-
     --texto-saida-color: #c6c6c6;
-
     --error-color: rgb(255, 55, 55);
-
     --box-shadow-color: rgba(0, 0, 0, 0.18);
 
     svg path{
@@ -156,7 +146,7 @@ svg {
 }
 
 label {
-    width: 50px;
+    width: 60px;
     height: 35px;
     display: block;
     position: relative;
@@ -164,6 +154,36 @@ label {
     border-radius: 200px;
     box-shadow: inset 0px 5px 15px var(--box-shadow-color), inset 0px -5px 15px rgba(255, 255, 255, 0.099);
     cursor: pointer;
+}
+
+label svg{
+    position: absolute;
+    width: 20px;
+    z-index: 100;
+}
+
+.sun{
+    right: 35px;
+    top: -382px;
+    fill: white;
+    stroke: white;
+    transition: 0.3s;
+}
+
+.moon {
+	left: 35px;
+	top: -382px;
+	fill: white;
+	transition: 0.3s;
+}
+
+input:checked + label .sun{
+    fill: var(--main-color);
+    stroke: var(--main-color);
+}
+
+input:checked + label .moon{
+    fill: white;
 }
 
 label:after{
@@ -188,7 +208,7 @@ input:checked + label{
 }
 
 input:checked +label:after{
-    left: 15px;
+    left: 25px;
     transform: translateX(4px);
     background: linear-gradient(270deg, #777,#3a3a3a);
 }
@@ -282,6 +302,21 @@ label:active:after{
 
     svg {
         margin-left: -3rem;
+    }
+
+    .sun{
+        right: 35px;
+        top: -382px;
+        fill: white;
+        stroke: white;
+        transition: 0.3s;
+    }
+    
+    .moon {
+        left: 83px;
+        top: -382px;
+        fill: white;
+        transition: 0.3s;
     }
 
     .container-top {
@@ -434,7 +469,7 @@ label:active:after{
     }
 }
 
-@media (min-width: 750px) and (max-width:900px) {
+@media (min-width: 750px) and (max-width:1000px) {
     .container {
         display: flex;
         flex-flow: column;
