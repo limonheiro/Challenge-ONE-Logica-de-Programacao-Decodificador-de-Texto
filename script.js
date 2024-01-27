@@ -1,3 +1,13 @@
+//criar um localStorage com nome de theme
+const theme = window.localStorage.getItem("theme");
+
+/* verifica se o tema armazenado no localStorage é escuro
+se sim aplica o tema escuro ao corpo e  se aplicado inicializa o checkbox*/
+if (theme === "dark-mode") {
+    document.getElementById("dark-mode").checked=true
+    document.lastChild.classList.add("dark-mode")
+};
+
 let convertido = false;
 
 const cripta = {
@@ -14,6 +24,24 @@ const descripta = {
     "ai": "a",
     "ober": "o",
     "ufat": "u",
+}
+
+function darkmode() {
+    console.log("click");
+    const toggle = document.getElementById('dark-mode');
+    const body = document.lastChild;
+
+    toggle.addEventListener('input', e => {
+        const isChecked = e.target.checked;
+
+        if (isChecked) {
+            body.classList.add('dark-mode');
+            window.localStorage.setItem("theme", "dark-mode");
+        } else {
+            body.classList.remove('dark-mode');
+            window.localStorage.setItem("theme", "ligth")
+        }
+    });
 }
 
 function erroTexto(texto) {
@@ -42,7 +70,13 @@ function resultado(texto) {
         const saida = document.getElementById("resultado");
         saida.textContent = texto;
     }
+}
 
+function semMensagem(texto) {
+    if (!texto) {
+        erroTexto('Sem texto fazer a ação.')
+        return 1;
+    }
 }
 
 function criptografarTexto() {
@@ -53,14 +87,13 @@ function criptografarTexto() {
         return 0;
     };
 
-    if(!texto){
-        erroTexto('Nenhuma texto para criptografar!')
+    if (semMensagem(texto)) {
         return 0;
     }
 
     let newText = texto.replace(/a|e|i|o|u/g, w => cripta[w]);
 
-    const htmlFinal = `<textarea class="saida_texto" id="resultado" disabled>${newText}</textarea><a onclick="copiarTexto()" class="botao" id="copiar">Copiar</a>`;
+    const htmlFinal = `<textarea class="saida_texto" id="resultado" disabled>${newText}</textarea><button onclick="copiarTexto()" class="botao" id="copiar">Copiar</button>`;
 
     saida.innerHTML = htmlFinal;
     convertido = true;
@@ -74,20 +107,22 @@ function descriptografarTexto() {
     }
 
     let newText = texto.replace(/ai|enter|imes|ober|ufat/g, w => descripta[w]);
-    if(texto === newText){
-        erroTexto('Texto não criptografado')
-    }else{
+    if (texto === newText) {
+        erroTexto('Mensagem não está criptografada.')
+    } else {
         resultado(newText)
     }
-    
+
 }
 
-function copiarTexto() {
-    const texto = document.getElementById("resultado").textContent;
+const copiarTexto = () => {
+    const texto = document.getElementById("resultado");
+    const textoCopy = texto.value;
 
-    navigator.clipboard.writeText(texto)
+    navigator.clipboard.writeText(textoCopy)
         .then(() => {})
+            alert('Texto copiado.')
         .catch(err => {
-            console.log('Something went wrong', err);
-        })
+            alert('Erro ao copiar o texto', err)
+        });
 }

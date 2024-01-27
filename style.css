@@ -1,13 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+:root {
+    --main-bg-color: #F3F5FC;
+    --main-color: #0a3871;
+
+    --white-color: white;
+
+    --textarea-bg: #ffffff00;
+
+    --texto-saida-color: #495057;
+
+    --error-color: rgb(255, 55, 55);
+
+    --box-shadow-color: rgba(0, 0, 0, 0.18);
+}
+
+.dark-mode:root {
+    color: white;
+    --main-bg-color: #1e294d;
+    --main-color: #5299F1;
+
+    --white-color: #121212;
+
+    --textarea-bg: #ffffff00;
+
+    --texto-saida-color: #c6c6c6;
+
+    --error-color: rgb(255, 55, 55);
+
+    --box-shadow-color: rgba(0, 0, 0, 0.18);
+
+    svg path{
+        fill: white;
+    }
+}
+
 * {
-    clear:both;
+    clear: both;
     scrollbar-width: thin;
     margin: 0px;
     padding: 0px;
 }
 
-*, :before, :after, ::before, ::after {
+*,
+:before,
+:after,
+::before,
+::after {
     box-sizing: border-box;
 }
 
@@ -15,8 +54,9 @@
     width: 2px;
 }
 
+
 body {
-    background-color: #F3F5FC;
+    background-color: var(--main-bg-color);
 }
 
 textarea {
@@ -24,46 +64,47 @@ textarea {
     border: none;
     resize: none;
     margin: 3rem 2rem 2rem 5rem;
-    background-color: #ffffff00;
-    color: #0a3871;
+    background-color: var(--textarea-bg);
+    color: var(--main-color);
     height: 80%;
     width: 100%;
     white-space: break-spaces;
 }
 
-.logo {
-    width: 60px;
+svg {
+    width: 7.5rem; 
     align-self: flex-start;
 }
 
 #saida {
     border-radius: 32px;
-    background-color: white;
+    background-color: var(--white-color);
     height: 100%;
     text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    box-shadow: var(--box-shadow-color) 0px 5px 15px;
 }
 
 .saida_texto {
     font-size: 24px;
-    color: #495057;
+    color: var(--texto-saida-color);
     width: 80%;
 }
 
-#mensagem_erro{
-    color: red;
+#mensagem_erro {
+    color: var(--error-color);
     font-weight: bolder;
-    
+
 }
 
 #copiar {
     width: 80%;
-    color: #0A3871;
-    border: 1px solid #0A3871;
-    background-color: white;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    background-color: var(--white-color);
     margin-bottom: 1rem;
 }
 
@@ -74,53 +115,111 @@ textarea {
 .container {
     display: flex;
     flex-flow: row;
+    flex-flow: row wrap;
     gap: 10px;
-    /* padding: 2rem; */
     justify-content: space-around;
 }
 
+.container-top{
+    display: flex;
+    flex-flow: row;
+    flex-flow: row wrap;
+    gap: 40px;
+    justify-content: space-between;
+}
+
 .botao {
-    border-color: white;
     border-radius: 24px;
     text-align: center;
     padding: 1.5rem 0px 1.5rem 0px;
-    /* width: 328px; */
-    color: white;
+    color: var(--texto-saida-color);
+    border: 1px solid var(--main-bg-color);
+    background-color: var(--main-bg-color);
+    width: auto;
     cursor: pointer;
 }
 
 .dica {
     display: flex;
     gap: 0.5rem;
-    margin: 0.5rem; 
+    margin: 0.5rem;
 }
 
 .imagem_dica {
     width: 16px;
-    
+
 }
 
 .dica_texto {
-    color: #495057;
+    color: var(--texto-saida-color);
     font-size: 12px;
 }
 
+label {
+    width: 50px;
+    height: 35px;
+    display: block;
+    position: relative;
+    background: var(--white-color);
+    border-radius: 200px;
+    box-shadow: inset 0px 5px 15px var(--box-shadow-color), inset 0px -5px 15px rgba(255, 255, 255, 0.099);
+    cursor: pointer;
+}
+
+label:after{
+    content: "";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    background: linear-gradient(180deg, #ffd9a7, #feb23f);
+    border-radius: 180px;
+}
+
+input{
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+input:checked + label{
+    background: #242424;
+}
+
+input:checked +label:after{
+    left: 15px;
+    transform: translateX(4px);
+    background: linear-gradient(270deg, #777,#3a3a3a);
+}
+
+label, label:after{
+    transition: 0.3s;
+}
+
+label:active:after{
+    width: 20px;
+}
 
 .botoes_acao {
-    /* align-self: flex-end; */
     padding-bottom: 1rem;
 }
 
 #criptografar {
     width: 45%;
-    background-color: #0A3871;
+    background-color: var(--main-color);
+    color: var(--main-bg-color);
+
+    &:hover {
+        background-color: #598ac7;
+    }
 }
 
 #descriptografar {
     width: 45%;
-    color: #0A3871;
-    background-color: #D8DFE8;
-    border: 1px solid #0A3871;
+    color: var(--main-color);
+    background-color: var(--main-bg-color);
+    border: 1px solid var(--main-color);
 }
 
 .imagem_inicial {
@@ -179,7 +278,19 @@ textarea {
     height: 90vh;
 }
 
-@media  (max-width:649px) {
+@media (max-width:649px) {
+
+    svg {
+        margin-left: -3rem;
+    }
+
+    .container-top {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .container {
         display: flex;
         flex-flow: column;
@@ -189,13 +300,12 @@ textarea {
     }
 
     #mensagem {
-        font-size: 32px;
-        width: 80%;
+        font-size: 12px;
+        width: 90%;
         text-align: left;
         flex-grow: 1;
         padding-right: 1rem;
         white-space: break-spaces;
-        width: 20%;
     }
 
     textarea {
@@ -203,8 +313,6 @@ textarea {
         border: none;
         resize: none;
         margin: 2rem 2rem 2rem 2rem;
-        background-color: #ffffff00;
-        color: #0a3871;
         height: 80%;
         width: 100%;
         white-space: break-spaces;
@@ -227,8 +335,7 @@ textarea {
 
     #saida {
         border-radius: 32px;
-        background-color: white;
-        height: 100%;
+        height: 80%;
         text-align: left;
         display: flex;
         flex-direction: column;
@@ -246,7 +353,7 @@ textarea {
         white-space: break-spaces;
     }
 
-    #painel_direito #painel_esquerdo{
+    #painel_direito #painel_esquerdo {
         display: flex;
         font-family: 'Inter', sans-serif;
     }
@@ -278,7 +385,7 @@ textarea {
         display: flex;
         flex-flow: column;
         justify-content: space-between;
-        width: 80%;
+        width: 95%;
     }
 
     #criptografar {
@@ -293,8 +400,8 @@ textarea {
         font-family: 'Inter', sans-serif;
         display: flex;
         flex-flow: column;
-        height: 90vh;
-        /* width: 80vh; */
+        /* height: 90vh; */
+        width: max-content;
     }
 
     #painel_direito {
@@ -302,12 +409,12 @@ textarea {
         font-family: 'Inter', sans-serif;
         align-self: flex-start;
         height: 90vh;
-        width: 100%;
+        width: 55vh;
     }
 
     #saida {
         border-radius: 32px;
-        background-color: white;
+        /* background-color: var(--main-bg-color); */
         height: 100%;
         text-align: left;
         display: flex;
@@ -345,8 +452,6 @@ textarea {
     }
 
     #saida {
-        border-radius: 32px;
-        background-color: white;
         height: 50%;
         width: 100%;
         text-align: left;
@@ -355,7 +460,6 @@ textarea {
         justify-content: space-between;
         align-items: center;
         align-self: flex-start;
-        box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;
     }
 
     .botoes_acao {
@@ -365,14 +469,11 @@ textarea {
 
     .saida_texto {
         font-size: 24px;
-        color: #495057;
-        /* margin: 2rem; */
         width: 94%;
     }
 
     .saida_texto_inicial {
         font-family: 'Inter', sans-serif;
-        /* padding: 0% 0% 60% 5%; */
         text-align: center;
         max-width: 400px;
         margin-bottom: -50%;
@@ -394,7 +495,7 @@ textarea {
     #painel_direito {
         display: flex;
         font-family: 'Inter', sans-serif;
-        width: 70vh;
+        width: 100%;
         margin-bottom: -45%;
     }
 
