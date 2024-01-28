@@ -1,10 +1,10 @@
 //criar um localStorage com nome de theme
 const theme = window.localStorage.getItem("theme");
 
-/* verifica se o tema armazenado no localStorage é escuro
-se sim aplica o tema escuro ao corpo e  se aplicado inicializa o checkbox*/
+/* verifica se o tema armazenado no localStorage é dark-mode(modo escuro),
+e se for aplica o tema escuro ao corpo e inicializa o checkbox com valor verdadeiro*/
 if (theme === "dark-mode") {
-    document.getElementById("dark-mode").checked=true
+    document.getElementById("dark-mode").checked = true
     document.lastChild.classList.add("dark-mode")
 };
 
@@ -72,9 +72,9 @@ function resultado(texto) {
     }
 }
 
-function semMensagem(texto) {
+function semMensagem(texto, action) {
     if (!texto) {
-        erroTexto('Sem texto fazer a ação.')
+        erroTexto(`Sem texto para ${action}.`)
         return 1;
     }
 }
@@ -87,7 +87,7 @@ function criptografarTexto() {
         return 0;
     };
 
-    if (semMensagem(texto)) {
+    if (semMensagem(texto, 'criptografar')) {
         return 0;
     }
 
@@ -106,6 +106,10 @@ function descriptografarTexto() {
         return 0
     }
 
+    if (semMensagem(texto, `descriptografar`)) {
+        return 0;
+    }
+
     let newText = texto.replace(/ai|enter|imes|ober|ufat/g, w => descripta[w]);
     if (texto === newText) {
         erroTexto('Mensagem não está criptografada.')
@@ -121,7 +125,7 @@ const copiarTexto = () => {
 
     navigator.clipboard.writeText(textoCopy)
         .then(() => {})
-            alert('Texto copiado.')
+    alert('Texto copiado.')
         .catch(err => {
             alert('Erro ao copiar o texto', err)
         });
